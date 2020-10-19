@@ -1,0 +1,186 @@
+ 
+<div>
+  <% if(typeof mdata != 'undefined') { %>
+  <% mdata.forEach(function(md) { %>
+  <br>
+  <%= md._id %>
+  <br>
+  <%= md.title %>
+  <br>
+  <%= md.organizer %>
+  <br>
+  <%= md.participants %>
+  <br>
+  <%= md.date %>
+  <br>
+  <%= md.mtime %>
+  <hr>
+  <%}); %>
+<% } %>
+</div>
+
+<br>
+<a href="/users/logout" style="position:absolute; left:1100px;" class="btn btn-secondary">Logout</a>
+
+<div class="row mt-5">
+  <div class="col-md-6 m-auto">
+    <div class="card card-body">
+      <h3 class="text-center mb-3"> Create new meeting
+      </h3>
+
+<% if(typeof errors != 'undefined') { %>
+  <% errors.forEach(function(error) { %>
+   <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <%= error.msg %>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+  <%}); %>
+<% } %>
+
+ <% if(success_msg != ''){ %>
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <%= success_msg %>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<% } %> 
+
+      <form action="/users/dashboard" method="POST">
+        <div class="form-group">
+          <label for="title">Meeting Title</label>
+          <input
+            id="title"
+            name="title"
+            class="form-control"
+            placeholder="Enter meeting title"
+            value="<%= typeof title != 'undefined' ? title : '' %>"
+          />
+        </div>
+        <div class="form-group">
+          <label for="organizer">Meeting organizer</label>
+          <input
+            id="organizer"
+            name="organizer"
+            class="form-control"
+            placeholder="Enter organizer's name"
+            value="<%= typeof organizer != 'undefined' ? organizer : '' %>"
+          />
+        </div>
+        <div class="form-group">
+          <label for="participants">Participants</label>
+          <input
+            id="participants"
+            name="participants"
+            class="form-control"
+            placeholder="Enter names of participants"
+            value="<%= typeof participants != 'undefined' ? participants : '' %>"
+          />
+        </div>
+        <div class="form-group">
+          <label for="date">Meeting date</label>
+          <input
+            id="date"
+            name="date"
+            class="form-control"
+            placeholder="dd-mm-yyyy"
+            value="<%= typeof date != 'undefined' ? date : '' %>"
+          />
+        </div>
+        <div class="form-group">
+          <label for="mtime">Meeting time</label>
+          <input
+            id="mtime"
+            name="mtime"
+            class="form-control"
+            placeholder="hh:mm"
+            value="<%= typeof mtime != 'undefined' ? mtime : '' %>"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">
+          Add new meeting
+        </button>
+      </form>
+    </div>
+
+    <br>
+    <div class="card card-body">
+    <form action="/users/results" method="POST">
+    <div class="form-group">
+     <label style="color:grey;" for="searchName">Search by meeting title</label>
+     <input
+            id="searchName"
+            name="searchName"
+            class="form-control"
+            placeholder="Enter meeting title"
+            value="<%= typeof searchName != 'undefined' ? searchName : '' %>"
+          />
+    </div>
+     <button style="max-width:50px;" type="submit" class="btn btn-secondary"> <i class="fa fa-search" aria-hidden="true"></i>
+        </button>
+    </form>
+    </div>
+
+<br>
+    <div class="card card-body">
+    <form action="/users/resultsorg" method="POST">
+    <div class="form-group">
+     <label style="color:grey;" for="searchOrg">Search by organizer's name</label>
+     <input
+            id="searchOrg"
+            name="searchOrg"
+            class="form-control"
+            placeholder="Enter the name of organizer"
+            value="<%= typeof searchOrg != 'undefined' ? searchOrg : '' %>"
+          />
+    </div>
+     <button style="max-width:50px;" type="submit" class="btn btn-secondary"> <i class="fa fa-search" aria-hidden="true"></i>
+        </button>
+    </form>
+    </div>
+
+  <br>
+    <div class="card card-body">
+    <form action="/users/resultsdate" method="POST">
+    <div class="form-group">
+     <label style="color:grey;" for="searchDate">Search by date</label>
+     <input
+            id="searchDate"
+            name="searchDate"
+            class="form-control"
+            placeholder="dd-mm-yyyy"
+            value="<%= typeof searchDate != 'undefined' ? searchDate : '' %>"
+          />
+    </div>
+     <button style="max-width:50px;" type="submit" class="btn btn-secondary"> <i class="fa fa-search" aria-hidden="true"></i>
+        </button>
+    </form>
+    </div>
+
+    <br>
+    <div class="card card-body">
+    <form action="/users/resultstime" method="POST">
+    <div class="form-group">
+     <label style="color:grey;" for="searchTime">Search by time</label>
+     <input
+            id="searchTime"
+            name="searchTime"
+            class="form-control"
+            placeholder="hh:mm"
+            value="<%= typeof searchTime != 'undefined' ? searchTime : '' %>"
+          />
+    </div>
+     <button style="max-width:50px;" type="submit" class="btn btn-secondary"> <i class="fa fa-search" aria-hidden="true"></i>
+        </button>
+    </form>
+    </div>
+
+    <br>
+    <form action="/users/resultsall" method="POST">
+     <button style="max-width:200px;" type="submit" class="btn btn-secondary"> Show all meetings
+        </button>
+    </form>
+  </div>
+</div>
